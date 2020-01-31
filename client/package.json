@@ -8,11 +8,15 @@
     "@potion/element": "1.0.0-next.0",
     "@potion/layout": "1.0.0-next.0",
     "axios": "^0.19.0",
+    "bootswatch": "^4.4.1",
+    "formik": "^2.1.3",
     "node-sass": "^4.12.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "reactstrap": "^8.4.1",
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "typescript": "3.3.3"
@@ -28,5 +32,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "http://localhost:5000"
 }
