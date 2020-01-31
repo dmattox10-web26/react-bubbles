@@ -10,11 +10,20 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState(initialColor)
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
   };
+
+  const saveNewColor = e => {
+    e.preventDefault()
+    axiosWithAuth()
+      .post('/api/colors', newColor)
+      .then(res => updateColors(res.data))
+      .catch(err => console.log(err))
+  }
 
   const saveEdit = e => {
     e.preventDefault();
@@ -36,6 +45,7 @@ const ColorList = ({ colors, updateColors }) => {
         let newColors = colors.filter(oldColor => oldColor.id != color.id)
         updateColors(newColors)
       })
+      .catch(err => console.log(err))
   };
 
   return (
@@ -91,27 +101,27 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <form onSubmit={saveEdit}>
+      <form onSubmit={saveNewColor}>
           <legend>add color</legend>
           <label>
             color name:
             <input
               onChange={e =>
-                setColorToEdit({ ...colorToEdit, color: e.target.value })
+                setNewColor({ ...newColor, color: e.target.value })
               }
-              value={colorToEdit.color}
+              value={newColor.color}
             />
           </label>
           <label>
             hex code:
             <input
               onChange={e =>
-                setColorToEdit({
-                  ...colorToEdit,
+                setNewColor({
+                  ...newColor,
                   code: { hex: e.target.value }
                 })
               }
-              value={colorToEdit.code.hex}
+              value={newColor.code.hex}
             />
           </label>
           <div className="button-row">
